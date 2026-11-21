@@ -1,0 +1,1034 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Journey | Angger Dava & Sinta ❤️</title>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #090512;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+}
+
+#scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #090512bb;
+    backdrop-filter: blur(15px);
+    z-index: 10;
+}
+
+.logo {
+    color: #ff8fc7;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-size: 12px;
+}
+
+nav a:hover {
+    color: #ff8fc7;
+}
+
+section {
+    min-height: 100vh;
+    padding: 110px 8% 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 8vw, 90px);
+    background: linear-gradient(90deg,#ff8fc7,#d6a5ff,white);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    max-width: 600px;
+    line-height: 1.9;
+    color: #d6c9e8;
+    margin-top: 20px;
+}
+
+.tag {
+    color: #ff9dce;
+    letter-spacing: 5px;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 30px;
+    border-radius: 50px;
+    background: linear-gradient(90deg,#a62e78,#7543b9);
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 0 25px #ff70bd66;
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: scale(1.08);
+}
+
+.title {
+    color: #ff9dce;
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    color: #c7b8d8;
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.names {
+    color: #ffacd7;
+    letter-spacing: 3px;
+    margin-top: 15px;
+}
+
+.timeline {
+    max-width: 700px;
+    width: 100%;
+    position: relative;
+    text-align: left;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 17px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(#ff8fc7,#9c62ff);
+}
+
+.memory {
+    position: relative;
+    margin-left: 45px;
+    margin-bottom: 25px;
+    padding: 25px;
+    background: #ffffff0d;
+    border: 1px solid #ff8fc744;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    transition: .3s;
+}
+
+.memory:hover {
+    transform: translateX(8px);
+    box-shadow: 0 0 25px #ff70bd33;
+}
+
+.memory::before {
+    content: "❤";
+    position: absolute;
+    left: -40px;
+    top: 25px;
+    color: #ff8fc7;
+    font-size: 20px;
+}
+
+.memory h3 {
+    color: #ff9dce;
+    margin: 10px 0;
+}
+
+.memory .date {
+    font-size: 12px;
+    color: #bca4d8;
+}
+
+.memory p {
+    color: #e2d8ee;
+    line-height: 1.8;
+}
+
+.counter {
+    margin-top: 35px;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #ff8fc766;
+    background: #ffffff0d;
+    max-width: 550px;
+    width: 100%;
+}
+
+.counter h3 {
+    color: #ff9dce;
+    margin-bottom: 15px;
+}
+
+#daysTogether {
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+}
+
+.calendar-box {
+    width: 100%;
+    max-width: 550px;
+    padding: 25px;
+    border-radius: 25px;
+    background: #ffffff0d;
+    border: 1px solid #ff8fc755;
+    backdrop-filter: blur(15px);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.calendar-header h2 {
+    color: #ff9dce;
+    font-size: 21px;
+}
+
+.calendar-header button {
+    padding: 10px 15px;
+    background: #a83c85;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 7px;
+}
+
+.calendar-grid div {
+    padding: 12px 2px;
+    border-radius: 9px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.calendar-grid .heading {
+    color: #ff9dce;
+    font-weight: bold;
+}
+
+.calendar-grid .date {
+    color: white;
+    background: #ffffff0c;
+    cursor: pointer;
+}
+
+.calendar-grid .date:hover {
+    background: #a83c85;
+}
+
+.calendar-grid .special {
+    background: linear-gradient(135deg,#d83d91,#7543b9);
+    box-shadow: 0 0 12px #ff70bd66;
+}
+
+.calendar-grid .selected {
+    outline: 2px solid white;
+}
+
+.calendar-grid .empty {
+    visibility: hidden;
+}
+
+.event-info {
+    margin-top: 25px;
+    padding: 20px;
+    text-align: left;
+    background: #ff8fc71a;
+    border-radius: 15px;
+    min-height: 90px;
+}
+
+.event-info h3 {
+    color: #ff9dce;
+    margin-bottom: 10px;
+}
+
+.event-info p {
+    color: #e2d8ee;
+    line-height: 1.8;
+}
+
+.special-list {
+    max-width: 700px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 15px;
+    margin-top: 35px;
+}
+
+.special-card {
+    background: #ffffff0d;
+    border: 1px solid #ff8fc744;
+    border-radius: 18px;
+    padding: 23px 10px;
+    transition: .3s;
+}
+
+.special-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 0 20px #ff8fc744;
+}
+
+.special-card span {
+    font-size: 30px;
+}
+
+.special-card h3 {
+    color: #ff9dce;
+    margin: 10px 0;
+    font-size: 15px;
+}
+
+.special-card p {
+    color: #d6c9e8;
+    font-size: 13px;
+}
+
+.letter {
+    max-width: 650px;
+    padding: 35px;
+    background: #ffffff0d;
+    border: 1px solid #ff8fc755;
+    border-radius: 25px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 40px #a52e7940;
+}
+
+.letter h2 {
+    color: #ff9dce;
+    margin-bottom: 20px;
+}
+
+.letter p {
+    color: #eadced;
+    line-height: 2;
+}
+
+.anniversary {
+    max-width: 650px;
+    width: 100%;
+    padding: 35px;
+    border: 1px solid #ff8fc7;
+    border-radius: 25px;
+    background: linear-gradient(145deg,#421538aa,#211332dd);
+    box-shadow: 0 0 40px #ff70bd33;
+}
+
+.anniversary h2 {
+    font-size: 30px;
+    color: #ff9dce;
+    margin-bottom: 12px;
+}
+
+.anniversary p {
+    color: #f0ddec;
+    line-height: 2;
+}
+
+.anniversary .signature {
+    color: #ff9dce;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #bba9cc;
+}
+
+@media(max-width:600px) {
+    nav {
+        padding: 15px 3%;
+    }
+
+    nav a {
+        font-size: 10px;
+        margin-left: 6px;
+    }
+
+    .logo {
+        font-size: 12px;
+    }
+
+    .title {
+        font-size: 30px;
+    }
+
+    .calendar-box {
+        padding: 12px;
+    }
+
+    .calendar-grid {
+        gap: 3px;
+    }
+
+    .calendar-grid div {
+        padding: 10px 0;
+        font-size: 11px;
+    }
+
+    .special-list {
+        gap: 8px;
+    }
+
+    .letter, .anniversary {
+        padding: 23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="scene"></canvas>
+
+<div class="content">
+
+<nav>
+    <div class="logo">OUR JOURNEY ❤️</div>
+    <div>
+        <a href="#home">Home</a>
+        <a href="#story">Story</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#anniversary">Anniversary</a>
+        <a href="#letter">Letter</a>
+    </div>
+</nav>
+
+<!-- HOME -->
+<section class="hero" id="home">
+
+    <div class="tag">A STORY WRITTEN BY TWO HEARTS</div>
+
+    <h1>Our Journey ❤️</h1>
+
+    <div class="names">ANGGER DAVA & SINTA</div>
+
+    <p>
+        Dua orang, dua hati, dan satu tujuan.
+        Cerita kita dimulai dari sebuah perkenalan,
+        melewati perjuangan jarak jauh,
+        dan terus berjalan dengan harapan
+        bisa bersama tanpa batas jarak.
+    </p>
+
+    <a href="#story" class="btn">Explore Our Story ❤️</a>
+
+</section>
+
+<!-- TIMELINE -->
+<section id="story">
+
+    <h2 class="title">Our Love Story</h2>
+
+    <p class="subtitle">
+        Setiap tanggal punya cerita.
+        Setiap cerita punya kenangan.
+    </p>
+
+    <div class="timeline">
+
+        <div class="memory">
+            <div class="date">15 OKTOBER 2025</div>
+            <h3>💗 Awal Kita Kenal</h3>
+            <p>
+                Siapa sangka perkenalan sederhana
+                bisa menjadi awal dari cerita yang
+                begitu berarti. Dari yang awalnya
+                tidak saling mengenal, akhirnya
+                menjadi dua orang yang saling dekat.
+            </p>
+        </div>
+
+        <div class="memory">
+            <div class="date">1 NOVEMBER 2025</div>
+            <h3>💍 Hari Kita Jadian</h3>
+            <p>
+                Hari ketika Angger Dava dan Sinta
+                memutuskan untuk memulai hubungan
+                bersama. Semoga kita selalu ingat
+                alasan awal memilih satu sama lain.
+            </p>
+        </div>
+
+        <div class="memory">
+            <div class="date">25 MEI 2026</div>
+            <h3>🌙 Awal Perjuangan LDR</h3>
+            <p>
+                Perjalanan jarak jauh dimulai.
+                Ada rindu yang harus ditahan,
+                waktu yang harus ditunggu,
+                dan banyak hal yang harus dipahami.
+                Walaupun tidak selalu bisa bertemu,
+                semoga kita tetap saling menjaga,
+                percaya, dan memperjuangkan tujuan
+                yang sama.
+            </p>
+        </div>
+
+        <div class="memory">
+            <div class="date">7 JULI 2005</div>
+            <h3>🎂 Happy Birthday Angger Dava</h3>
+            <p>
+                Hari spesial Angger Dava.
+                Semoga selalu sehat, bahagia,
+                dimudahkan segala urusannya,
+                dan semua impian bisa tercapai.
+                Terima kasih sudah menjadi bagian
+                dari cerita ini.
+            </p>
+        </div>
+
+        <div class="memory">
+            <div class="date">21 DESEMBER 2007</div>
+            <h3>🎂 Happy Birthday Sinta</h3>
+            <p>
+                Hari spesial Sinta.
+                Semoga selalu diberikan kebahagiaan,
+                kesehatan, dan banyak hal baik.
+                Semoga semua harapan dan impian
+                bisa menjadi kenyataan.
+            </p>
+        </div>
+
+        <div class="memory">
+            <div class="date">25 MEI 2026 — ENTah KAPAN</div>
+            <h3>♾️ Until We Meet</h3>
+            <p>
+                Tidak tahu sampai kapan kita harus
+                menjalani jarak ini. Tetapi semoga
+                suatu hari nanti kita bisa bertemu
+                tanpa harus menghitung jarak.
+                Semoga perjuangan ini menjadi
+                kenangan indah yang berhasil kita
+                lewati bersama.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="counter">
+        <h3>💕 Perjalanan LDR Kita</h3>
+        <div id="daysTogether">---</div>
+        <p>Hari sejak 25 Mei 2026</p>
+        <p style="margin-top:10px;color:#ff9dce">
+            Sampai entah kapan, semoga tetap satu tujuan.
+        </p>
+    </div>
+
+</section>
+
+<!-- CALENDAR -->
+<section id="calendar">
+
+    <h2 class="title">Our Special Calendar</h2>
+
+    <p class="subtitle">
+        Hari-hari yang akan selalu kita ingat ❤️
+    </p>
+
+    <div class="calendar-box">
+
+        <div class="calendar-header">
+            <button onclick="changeMonth(-1)">❮</button>
+            <h2 id="monthYear"></h2>
+            <button onclick="changeMonth(1)">❯</button>
+        </div>
+
+        <div class="calendar-grid" id="calendarDays"></div>
+
+        <div class="event-info" id="eventInfo">
+            <h3>💕 Our Memories</h3>
+            <p>Pilih tanggal dengan simbol hati untuk melihat kenangan.</p>
+        </div>
+
+    </div>
+
+    <div class="special-list">
+
+        <div class="special-card">
+            <span>💗</span>
+            <h3>15 Oktober 2025</h3>
+            <p>Awal Kita Kenal</p>
+        </div>
+
+        <div class="special-card">
+            <span>💍</span>
+            <h3>1 November</h3>
+            <p>Happy Anniversary</p>
+        </div>
+
+        <div class="special-card">
+            <span>🌙</span>
+            <h3>25 Mei 2026</h3>
+            <p>Awal Perjuangan LDR</p>
+        </div>
+
+        <div class="special-card">
+            <span>🎂</span>
+            <h3>7 Juli</h3>
+            <p>Happy Birthday Angger Dava</p>
+        </div>
+
+        <div class="special-card">
+            <span>🎂</span>
+            <h3>21 Desember</h3>
+            <p>Happy Birthday Sinta</p>
+        </div>
+
+        <div class="special-card">
+            <span>♾️</span>
+            <h3>Until Forever</h3>
+            <p>Our Future Story</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ANNIVERSARY -->
+<section id="anniversary">
+
+    <div class="anniversary">
+
+        <h2>💍 Happy Anniversary ❤️</h2>
+
+        <h3 style="color:white;margin-bottom:20px">
+            Angger Dava & Sinta
+        </h3>
+
+        <p style="color:#ffacd7;margin-bottom:20px">
+            1 November 2025 — Forever and Always
+        </p>
+
+        <p>
+            Terima kasih sudah memilih untuk saling
+            bertahan sampai sejauh ini.
+            <br><br>
+            Jangan pernah lupa bagaimana awal kita
+            memulai semuanya, alasan kita memilih
+            untuk bersama, dan tujuan yang ingin
+            kita capai berdua.
+            <br><br>
+            Mungkin perjalanan kita tidak selalu
+            mudah. Ada jarak, rindu, waktu, dan
+            banyak hal yang harus dikorbankan.
+            Tetapi jangan sampai semua itu membuat
+            kita lupa dengan janji dan harapan
+            yang pernah kita bangun bersama.
+            <br><br>
+            Semoga kita tidak hanya bertahan
+            karena sudah sejauh ini, tetapi karena
+            masih ingin berjalan menuju tujuan
+            yang sama.
+            <br><br>
+            Semoga suatu hari nanti jarak bukan
+            lagi cerita kita, melainkan hanya
+            kenangan tentang perjuangan yang
+            berhasil kita lewati bersama.
+        </p>
+
+        <div class="signature">
+            I love you. Let's keep our promises. ♾️
+        </div>
+
+    </div>
+
+</section>
+
+<!-- LETTER -->
+<section id="letter">
+
+    <div class="letter">
+
+        <h2>💌 A Letter For You</h2>
+
+        <p>
+            Hai, Angger Dava dan Sinta.
+            <br><br>
+            Kita memulai perjalanan ini dengan
+            sebuah perkenalan sederhana.
+            Tidak ada yang tahu bagaimana
+            cerita ini akan berjalan.
+            <br><br>
+            Sekarang kita punya banyak hal
+            untuk dikenang. Ada hari bahagia,
+            ada perjuangan, dan ada jarak
+            yang harus kita hadapi.
+            <br><br>
+            Mungkin tidak semua orang mengerti
+            bagaimana rasanya menjalani hubungan
+            jarak jauh. Ada rindu yang harus
+            ditahan dan waktu yang harus ditunggu.
+            <br><br>
+            Tetapi jangan pernah lupa tujuan
+            awal kita bersama. Jangan biarkan
+            jarak membuat kita lupa alasan
+            mengapa kita memilih satu sama lain.
+            <br><br>
+            Semoga suatu hari nanti kita tidak
+            lagi menghitung jarak, tetapi
+            menghitung hari-hari bahagia saat
+            bisa bersama.
+            <br><br>
+            Aku tidak tahu sampai kapan cerita
+            ini akan berjalan, tetapi semoga
+            kita terus memilih untuk menulisnya
+            bersama.
+            <br><br>
+            <strong>Until the distance disappears. ❤️</strong>
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+    Made with love ❤️
+    <br><br>
+    Angger Dava & Sinta
+    <br>
+    Our Journey — 2025 to Forever
+</footer>
+
+</div>
+
+<!-- CALENDAR JAVASCRIPT -->
+<script>
+const specialEvents = [
+    {
+        day: 15,
+        month: 9,
+        year: 2025,
+        title: "💗 Awal Kita Kenal",
+        description: "15 Oktober 2025 menjadi awal perkenalan Angger Dava dan Sinta."
+    },
+    {
+        day: 1,
+        month: 10,
+        year: 2025,
+        yearly: true,
+        title: "💍 Happy Anniversary",
+        description: "Selamat anniversary! Jangan pernah lupa tujuan awal kita bersama. Terus saling menjaga, percaya, dan berjuang."
+    },
+    {
+        day: 25,
+        month: 4,
+        year: 2026,
+        title: "🌙 Awal Perjuangan LDR",
+        description: "25 Mei 2026 menjadi awal perjuangan jarak jauh Angger Dava dan Sinta."
+    },
+    {
+        day: 7,
+        month: 6,
+        yearly: true,
+        title: "🎂 Happy Birthday Angger Dava",
+        description: "7 Juli adalah hari spesial Angger Dava. Semoga selalu bahagia dan semua impiannya tercapai."
+    },
+    {
+        day: 21,
+        month: 11,
+        yearly: true,
+        title: "🎂 Happy Birthday Sinta",
+        description: "21 Desember adalah hari spesial Sinta. Semoga selalu bahagia dan semua harapannya terwujud."
+    }
+];
+
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+let selectedDate = null;
+
+function renderCalendar() {
+    const grid = document.getElementById("calendarDays");
+    grid.innerHTML = "";
+
+    ["Min","Sen","Sel","Rab","Kam","Jum","Sab"].forEach(day => {
+        const div = document.createElement("div");
+        div.className = "heading";
+        div.innerText = day;
+        grid.appendChild(div);
+    });
+
+    const names = [
+        "Januari","Februari","Maret","April",
+        "Mei","Juni","Juli","Agustus",
+        "September","Oktober","November","Desember"
+    ];
+
+    document.getElementById("monthYear").innerText =
+        names[currentMonth] + " " + currentYear;
+
+    const firstDay = new Date(currentYear,currentMonth,1).getDay();
+    const totalDays = new Date(currentYear,currentMonth+1,0).getDate();
+
+    for(let i=0; i<firstDay; i++) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        grid.appendChild(empty);
+    }
+
+    for(let day=1; day<=totalDays; day++) {
+        const cell = document.createElement("div");
+        cell.className = "date";
+        cell.innerText = day;
+
+        const event = specialEvents.find(e =>
+            e.day === day &&
+            e.month === currentMonth &&
+            (e.year === currentYear || e.yearly)
+        );
+
+        if(event) {
+            cell.classList.add("special");
+            cell.innerText = day + " ♥";
+        }
+
+        if(selectedDate &&
+            selectedDate.day === day &&
+            selectedDate.month === currentMonth &&
+            selectedDate.year === currentYear) {
+            cell.classList.add("selected");
+        }
+
+        cell.onclick = () => {
+            selectedDate = {
+                day, month: currentMonth, year: currentYear
+            };
+
+            const info = document.getElementById("eventInfo");
+
+            if(event) {
+                info.innerHTML = `
+                    <h3>${event.title}</h3>
+                    <p>${event.description}</p>
+                `;
+            } else {
+                info.innerHTML = `
+                    <h3>✨ A Beautiful Day</h3>
+                    <p>Hari biasa juga bisa menjadi kenangan yang indah bagi kita.</p>
+                `;
+            }
+
+            renderCalendar();
+        };
+
+        grid.appendChild(cell);
+    }
+}
+
+function changeMonth(direction) {
+    currentMonth += direction;
+
+    if(currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+
+    if(currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
+
+    selectedDate = null;
+    renderCalendar();
+}
+
+renderCalendar();
+
+// LDR COUNTER
+function updateCounter() {
+    const start = new Date(2026, 4, 25);
+    const today = new Date();
+
+    start.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    const days = Math.floor((today - start) / 86400000);
+
+    document.getElementById("daysTogether").innerText =
+        days >= 0 ? days.toLocaleString("id-ID") : "0";
+}
+
+updateCounter();
+</script>
+
+<!-- THREE.JS 3D -->
+<script type="module">
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+    60,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+);
+
+camera.position.z = 8;
+
+const renderer = new THREE.WebGLRenderer({
+    canvas: document.querySelector("#scene"),
+    alpha: true,
+    antialias: true
+});
+
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+
+scene.add(new THREE.AmbientLight(0xffffff,1));
+
+const light = new THREE.PointLight(0xff72c0,50);
+light.position.set(2,3,5);
+scene.add(light);
+
+// 3D HEART
+const heart = new THREE.Shape();
+
+heart.moveTo(0,0.5);
+heart.bezierCurveTo(0,1.5,-1.5,1.5,-1.5,0.5);
+heart.bezierCurveTo(-1.5,-0.5,0,-1.3,0,-1.8);
+heart.bezierCurveTo(0,-1.3,1.5,-0.5,1.5,0.5);
+heart.bezierCurveTo(1.5,1.5,0,1.5,0,0.5);
+
+const geometry = new THREE.ExtrudeGeometry(heart,{
+    depth:0.5,
+    bevelEnabled:true,
+    bevelSegments:5,
+    bevelSize:0.12,
+    bevelThickness:0.12
+});
+
+const material = new THREE.MeshPhysicalMaterial({
+    color:0xff4fa3,
+    metalness:0.3,
+    roughness:0.2,
+    clearcoat:1
+});
+
+const heartMesh = new THREE.Mesh(geometry,material);
+heartMesh.scale.set(0.9,0.9,0.9);
+scene.add(heartMesh);
+
+// STARS
+const positions = [];
+
+for(let i=0;i<1200;i++) {
+    positions.push(
+        (Math.random()-0.5)*30,
+        (Math.random()-0.5)*20,
+        (Math.random()-0.5)*20
+    );
+}
+
+const starGeometry = new THREE.BufferGeometry();
+
+starGeometry.setAttribute(
+    "position",
+    new THREE.Float32BufferAttribute(positions,3)
+);
+
+const stars = new THREE.Points(
+    starGeometry,
+    new THREE.PointsMaterial({
+        color:0xffb8df,
+        size:0.035,
+        transparent:true,
+        opacity:0.8
+    })
+);
+
+scene.add(stars);
+
+// ANIMATION
+function animate() {
+    requestAnimationFrame(animate);
+
+    heartMesh.rotation.y += 0.008;
+    heartMesh.rotation.x =
+        Math.sin(Date.now()*0.001)*0.12;
+
+    heartMesh.position.y =
+        Math.sin(Date.now()*0.002)*0.2;
+
+    stars.rotation.y += 0.0003;
+
+    renderer.render(scene,camera);
+}
+
+animate();
+
+// RESPONSIVE
+window.addEventListener("resize",()=>{
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+});
+</script>
+
+</body>
+</html>
